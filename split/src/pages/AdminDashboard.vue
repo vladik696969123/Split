@@ -1,0 +1,141 @@
+<template> 
+  <div class="dashboard-wrapper">
+    <header class="nav-bar">
+      <div class="nav-left">
+        <span class="logo-icon"></span> Split
+      </div>
+      <img src="https://split.tg/assets/split-logo-DxgWn_mO.png" alt="split" class="split">
+      <nav class="nav-links">
+        <router-link to="/admin/products" active-class="active-link">Main</router-link>
+        <router-link to="/admin/reviews" active-class="active-link">Reviews</router-link>
+        <router-link to="/login" active-class="active-link">Personal</router-link>
+      </nav>
+    </header>
+
+    <!-- Сіра лінія під навбаром -->
+
+    <main class="main-content">
+      <router-view />
+    </main>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AdminDashboard',
+};
+</script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white;
+  font-family: 'Poppins', sans-serif;
+  color: #000;
+}
+
+/* === Навбар === */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.85); /* прозорий білий фон */
+  backdrop-filter: blur(10px); /* ефект прозорості / розмиття */
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 8%;
+  transition: background 0.4s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* легка тінь для виділення */
+  animation: slideDown 0.6s ease-out;
+}
+
+.nav-left {
+  font-weight: 700;
+  font-size: 22px;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+}
+
+.logo-icon {
+  font-size: 22px;
+  animation: pulse 2.5s infinite;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links a {
+  color: #757575;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background: #000000;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #000000;
+  transform: translateY(-1px);
+}
+
+/* Сіра лінія під навбаром */
+.bottom-line {
+  width: 100%;
+  height: 1px;
+  background-color: #cccccc; /* сірий колір */
+}
+
+/* Основний контент */
+.main-content {
+  flex: 1;
+  padding: 40px 8%;
+}
+
+/* === Анімації === */
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.12); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.split{
+  border-radius: 10px;
+  height: 30px;
+  position: absolute;
+  right: 1745px;
+}
+</style>

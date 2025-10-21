@@ -215,8 +215,8 @@ iframe{
   background-color: hsl(var(--card));
     color: hsl(var(--card-foreground));
     border-radius: 10px;
-    border: 1px solid hsl(var(--border));
-    box-shadow: 0 1px 3px rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
+    border: 1px solid rgb(224, 224, 224);
+    box-shadow: 0 2px 5px rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
     transition: all .2s ease-in-out;
     cursor: pointer;
 }

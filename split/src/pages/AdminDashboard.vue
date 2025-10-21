@@ -93,7 +93,7 @@ export default {
   bottom: 0;
   height: 2px;
   width: 0%;
-  background: #000000;
+  background: #3b82f6;
   transition: width 0.3s ease;
   border-radius: 2px;
 }

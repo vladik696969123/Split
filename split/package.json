@@ -11,6 +11,9 @@
   "dependencies": {
     "@heroicons/vue": "^2.2.0",
     "core-js": "^3.8.3",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.9",
     "papaparse": "^5.5.3",
     "router": "^2.2.0",
     "vue": "^3.2.13",
@@ -45,5 +48,10 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "description": "``` npm install ```",
+  "main": "babel.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

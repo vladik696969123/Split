@@ -2,13 +2,26 @@
   <div class="dashboard-wrapper">
     <header class="nav-bar">
       <div class="nav-left">
-        <span class="logo-icon"></span> Split
+        <a href="#" class="logo-icon">Split</a>
       </div>
-      <img src="https://split.tg/assets/split-logo-DxgWn_mO.png" alt="split" class="split">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqrIfehLlIc2QwyIOQ1df7q-NvHz2TAlCfVA&s" alt="split" class="split">
       <nav class="nav-links">
         <router-link to="/admin/products" active-class="active-link">Main</router-link>
         <router-link to="/admin/reviews" active-class="active-link">Reviews</router-link>
-        <router-link to="/login" active-class="active-link">Personal</router-link>
+        <router-link 
+    :to="isLoggedIn ? '/profile' : '/login'" 
+    class="account-link"
+    active-class="active-link"
+  >
+    <template v-if="isLoggedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+      </svg>
+    </template>
+    <template v-else>
+      Account
+    </template>
+  </router-link>
       </nav>
     </header>
 
@@ -21,9 +34,19 @@
 </template>
 
 <script>
+
 export default {
   name: 'AdminDashboard',
-};
+  data() {
+    return {
+      isLoggedIn: false
+    }
+  },
+  created() {
+    // Перевіряємо, чи користувач авторизований (наприклад через localStorage)
+    this.isLoggedIn = !!localStorage.getItem('username');
+  }
+}
 </script>
 
 <style scoped>
@@ -67,7 +90,6 @@ export default {
 
 .logo-icon {
   font-size: 22px;
-  animation: pulse 2.5s infinite;
 }
 
 .nav-links {
@@ -136,6 +158,19 @@ export default {
   border-radius: 10px;
   height: 30px;
   position: absolute;
-  right: 1745px;
+  right: 1750px;
 }
+
+.account-link svg {
+  width: 24px;
+  height: 24px;
+  color: #757575;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.account-link svg:hover {
+  color: #000;
+  transform: translateY(-2px);
+}
+
 </style>

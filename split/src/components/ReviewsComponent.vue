@@ -1,13 +1,13 @@
 <template>
   <div class="reviews-container">
-    <h2>Відгуки клієнтів</h2>
-    <div class="table-wrapper">
+    <h2>Customer's Reviews</h2>
+    <div>
       <table>
         <thead>
           <tr>
-            <th>Ім’я</th>
-            <th>Рейтинг</th>
-            <th>Коментар</th>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Comment</th>
           </tr>
         </thead>
         <tbody>
@@ -44,15 +44,15 @@ export default {
   created() {
     const csvContent = `
 Name,Rating,Comment
-Іван,5,Дякую за швидку доставку
-Ольга,5,Все супер! Буду замовляти ще
-Андрій,5,Обслуговування, як завжди - на висоті
-Марина,4,Все чудово! Покупкою задоволена, але коробка була прим'ята.
-Сергій,5,Рекомендую цей чудовий магазин усім!
-Данило,5,Дуже демократичні ціни. Я завжди купую лише тут.
-Матвій,5,Дякую за подарунок до покупки - завжди радуєте приємними сюрпризами.
-Анна,5,Дякую за чудові знижки
-Раймонд,4,Як завжди все кльово, але малий термін гарантії для годинника, хотілося б довше.
+Emily Carter,5,Fast delivery, Telegram Stars arrived instantly!
+Daniel Moore,5,Got my username quickly, smooth process.
+Sophia Nguyen,5,Telegram Premium worked perfectly!
+Liam Brown,5,Trusted site, super quick service.
+Olivia Johnson,5,Support replied fast, great help!
+Ethan Williams,5,Always buy my Stars here, 10/10.
+Ava Martinez,5,Easy checkout and good prices.
+Noah Smith,5,Rare username secured in seconds!
+Mia Anderson,5,Everything worked flawlessly, thanks Split!
     `;
     Papa.parse(csvContent.trim(), {
       header: true,
@@ -72,22 +72,24 @@ Name,Rating,Comment
   min-height: calc(100vh - 100px);
   padding: 40px 5%;
   font-family: "Inter", sans-serif;
-  background: #0a0f14;
+  background: white;
   color: #2c3e50;
 }
 
 h2 {
   text-align: center;
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 1000;
   margin-bottom: 35px;
-  color: white;
+  color: #3b82f6;
   letter-spacing: 0.5px;
+    background-size: 200% 200%;
+  animation: gradient-animation 3s ease infinite;
 }
 
 .table-wrapper {
   overflow-x: auto;
-  background: #0a0f14;
+  background: white;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
   padding: 25px;

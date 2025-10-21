@@ -1,35 +1,35 @@
 <template> 
   <div class="page">
     <div class="card">
-      <h2>{{ mode === 'login' ? 'Авторизація' : 'Реєстрація' }}</h2>
+      <h2>{{ mode === 'login' ? 'Authorization' : 'Registration' }}</h2>
 
       <transition name="fade" mode="out-in">
         <div v-if="mode === 'login'" key="login">
           <div class="group">
-            <input v-model="username" placeholder="Логін або email" />
+            <input v-model="username" placeholder="Email" />
           </div>
           <div class="group">
-            <input v-model="password" type="password" placeholder="Пароль" />
+            <input v-model="password" type="password" placeholder="Password" />
           </div>
 
-          <button class="btn" @click="login">Увійти</button>
+          <button class="btn" @click="login">Log In</button>
 
           <p class="text">
-            Немає акаунта?
-            <span @click="switchMode" class="link">Зареєструйтесь</span>
+            Don't have an account?
+            <span @click="switchMode" class="link">Sign Up</span>
           </p>
         </div>
 
         <div v-else key="register">
           <div class="group">
-            <input v-model="email" type="email" placeholder="Введіть Gmail" />
+            <input v-model="email" type="email" placeholder="Enter Email" />
           </div>
 
           <div class="group">
             <input
               v-model="password"
               type="password"
-              placeholder="Введіть пароль"
+              placeholder="Enter your password"
               @input="validatePassword"
             />
           </div>
@@ -40,30 +40,30 @@
             </div>
           </transition>
 
-          <button class="btn" @click="register">Зареєструватися</button>
+          <button class="btn" @click="register">Sign Up</button>
 
           <transition name="fade">
             <div v-if="showCodeInput" class="verify">
               <div class="info-box">
                 <div class="icon"></div>
                 <div>
-                  Лист надіслано на<br />
+                  The letter was sent to<br />
                   <strong>{{ email }}</strong>
                 </div>
               </div>
 
               <input
                 v-model="enteredCode"
-                placeholder="Введіть код із листа"
+                placeholder="Enter the code from the letter"
                 class="code-input"
               />
-              <button class="btn confirm" @click="verifyCode">Підтвердити</button>
+              <button class="btn confirm" @click="verifyCode">Confirm</button>
             </div>
           </transition>
 
           <p class="text">
-            Вже маєте акаунт?
-            <span @click="switchMode" class="link">Увійдіть</span>
+            Already have an account?
+            <span @click="switchMode" class="link">Log In</span>
           </p>
         </div>
       </transition>
@@ -102,23 +102,23 @@ export default {
     validatePassword() {
       const pwd = this.password;
       if (pwd.length < 8) {
-        this.passwordError = "Пароль має бути не менше 8 символів.";
+        this.passwordError = "The password must be at least 8 characters long.";
         return false;
       }
       if (!/[A-Z]/.test(pwd)) {
-        this.passwordError = "Додайте хоча б одну ВЕЛИКУ літеру.";
+        this.passwordError = "Add at least one CAPITAL letter.";
         return false;
       }
       if (!/[a-z]/.test(pwd)) {
-        this.passwordError = "Додайте хоча б одну маленьку літеру.";
+        this.passwordError = "Add at least one lowercase letter.";
         return false;
       }
       if (!/[0-9]/.test(pwd)) {
-        this.passwordError = "Додайте хоча б одну цифру.";
+        this.passwordError = "Add at least one digit.";
         return false;
       }
       if (!/[!@#$%^&*]/.test(pwd)) {
-        this.passwordError = "Додайте спецсимвол (!@#$%^&*).";
+        this.passwordError = "Add a special character.";
         return false;
       }
       this.passwordError = "";
@@ -131,19 +131,19 @@ export default {
         (u) => (u.email === this.username || u.email === this.email) && u.password === this.password
       );
       if (user) {
-        this.message = "✅ Вхід успішний!";
+        this.message = "✅ Login successful!";
         this.isError = false;
         localStorage.setItem("authUser", user.email);
-        this.$router.push("/profile");
+        this.$router.push("/welcome");
       } else {
-        this.message = "❌ Невірний логін або пароль!";
+        this.message = "❌ Incorrect email or password!";
         this.isError = true;
       }
     },
 
    async register() {
   if (!this.email || !this.password) {
-    this.message = "Введіть email і пароль!";
+    this.message = "Enter your email and password!";
     this.isError = true;
     return;
   }
@@ -155,13 +155,13 @@ export default {
 
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   if (users.find((u) => u.email === this.email)) {
-    this.message = "⚠️ Цей email уже зареєстрований!";
+    this.message = "⚠️ This email is already registered!";
     this.isError = true;
     return;
   }
 
   try {
-    const res = await fetch("https://my-shop-gqvg.onrender.com/send-code", {
+    const res = await fetch("http://localhost:3000/send-code", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: this.email }),
@@ -177,14 +177,14 @@ export default {
       this.showCodeInput = true;
       this.message = "";
 
-      console.log("Код підтвердження (dev):", this.verificationCode);
+      console.log("Confirmation code (dev):", this.verificationCode);
     } else {
-      this.message = "Помилка при надсиланні листа.";
+      this.message = "Error sending email.";
       this.isError = true;
     }
   } catch (err) {
     console.error(err);
-    this.message = "Помилка сервера.";
+    this.message = "Server error.";
     this.isError = true;
   }
 },
@@ -195,7 +195,7 @@ export default {
   const entered = (this.enteredCode || "").trim();
 
   if (!savedCode) {
-    this.message = "Код не знайдено. Натисніть 'Зареєструватися' щоб отримати код ще раз.";
+    this.message = "Code not found. Click 'Register' to get the code again.";
     this.isError = true;
     return;
   }
@@ -219,13 +219,13 @@ export default {
     localStorage.removeItem("pendingUser");
     localStorage.removeItem("registeredEmail");
 
-    this.message = "✅ Реєстрація підтверджена!";
+    this.message = "✅ Registration confirmed!";
     this.isError = false;
     localStorage.setItem("authUser", this.email);
     this.$router.push("/profile");
     this.clearFields();
   } else {
-    this.message = "❌ Невірний код!";
+    this.message = "❌ Invalid code!";
     this.isError = true;
     console.warn("Entered:", entered, "Expected:", savedCode);
   }
@@ -413,7 +413,7 @@ input:focus {
   display: block;
   width: 0%;
   height: 2px;
-  background: white;
+  background: #3b82f6;
   transition: width 0.3s ease;
   margin-top: 2px;
 }

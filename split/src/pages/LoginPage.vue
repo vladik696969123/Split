@@ -222,7 +222,7 @@ export default {
     this.message = "✅ Registration confirmed!";
     this.isError = false;
     localStorage.setItem("authUser", this.email);
-    this.$router.push("/profile");
+    this.$router.push("/welcome");
     this.clearFields();
   } else {
     this.message = "❌ Invalid code!";

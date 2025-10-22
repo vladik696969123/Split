@@ -1,4 +1,4 @@
-# ✂️ Split — Admin Dashboard for Telegram Marketplace
+# 🌊 Split — Admin Dashboard for Telegram Marketplace 🌊
 
 > A modern **admin dashboard** for managing products and reviews in the Split ecosystem 🧾  
 > Built with **Vue.js 3**, featuring a clean interface, smooth navigation, and full responsiveness.
@@ -36,7 +36,7 @@
 
 > 🎬 *Example of the admin dashboard interface:*
 
-![Preview](./images/preview.png)
+![Preview](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTgxZ3gxNTRxeWxjOXoxaGk0YzQwYmZkdTczajQ0ZnB0ZXoyOHFmcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PRkhJC3YLVlX5yMJXK/giphy.gif)
 
 *(You can replace this with your own screenshot or a GIF, e.g. `![Demo](./images/demo.gif)`)*
   

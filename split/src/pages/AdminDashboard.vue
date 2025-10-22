@@ -1,15 +1,16 @@
 <template> 
   <div class="dashboard-wrapper">
     <header class="nav-bar">
-      <div class="nav-left">
-        <a href="#" class="logo-icon">Split</a>
-      </div>
-
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqrIfehLlIc2QwyIOQ1df7q-NvHz2TAlCfVA&s"
-        alt="split"
-        class="split"
-      />
+<div class="nav-left">
+  <div class="logo-group">
+    <img
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqrIfehLlIc2QwyIOQ1df7q-NvHz2TAlCfVA&s"
+      alt="split"
+      class="split"
+    />
+     <router-link to="/" class="logo-icon">Split</router-link>
+  </div>
+</div>
 
       <button class="menu-btn" @click="toggleMenu">
         ☰
@@ -54,7 +55,6 @@ export default {
     };
   },
   created() {
-    // Перевірка, чи користувач авторизований
     this.isLoggedIn = !!localStorage.getItem('username');
   },
   methods: {
@@ -81,17 +81,17 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 100%; /* ✅ тепер на всю ширину */
+  width: 100%;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   color: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 40px; /* замість відсотків — фіксовані відступи */
+  padding: 14px 40px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   animation: slideDown 0.6s ease-out;
-  box-sizing: border-box; /* щоб padding не зменшував ширину */
+  box-sizing: border-box;
 }
 
 .logo-icon {
@@ -99,6 +99,7 @@ export default {
   font-weight: 700;
   color: black;
   text-decoration: none;
+  text-align: left;
 }
 
 .nav-links {
@@ -152,10 +153,7 @@ export default {
 }
 
 .split {
-  border-radius: 10px;
   height: 30px;
-  margin-right: auto;
-  margin-left: 20px;
 }
 
 .menu-btn {
@@ -206,5 +204,17 @@ export default {
   .main-content {
     padding: 20px 5%;
   }
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.split {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
 }
 </style>

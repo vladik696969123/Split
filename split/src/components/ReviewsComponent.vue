@@ -20,7 +20,7 @@
     <td data-label="Name">{{ review.Name }}</td>
     <td data-label="Rating">
       <span class="stars">
-        <span v-for="n in review.Rating" :key="n">⭐</span>
+        <span v-for="n in review.Rating" :key="n">⭐⭐⭐⭐⭐</span>
       </span>
     </td>
     <td data-label="Comment">{{ review.Comment }}</td>

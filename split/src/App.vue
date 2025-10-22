@@ -5,6 +5,12 @@
   </div>
 </template>
 
+<style>
+html {
+  scroll-behavior: smooth;
+}
+</style>
+
 <script>
  import FooterComponent from './components/FooterComponent.vue';
 

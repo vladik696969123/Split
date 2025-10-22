@@ -22,7 +22,7 @@ const routes = [
       { path: 'reviews', component: ManageReviews },
     ],
   },
-  { path: '/login', component: LoginPage},
+  { path: '/login', component: LoginPage },
   { path: '/welcome', component: WelcomePage },
   { path: '/main', component: ManageProducts },
 ];
@@ -30,6 +30,14 @@ const routes = [
 const router = createRouter({
   history: createWebHistory('/Split/'),
   routes,
+
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  },
 });
 
 export default router;

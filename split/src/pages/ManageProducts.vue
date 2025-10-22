@@ -136,6 +136,7 @@ const services = [
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradient-animation 3s ease infinite;
+  line-height: 1.3;
 }
 
 .gradient-text1 {

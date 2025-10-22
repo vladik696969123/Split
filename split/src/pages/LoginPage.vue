@@ -164,7 +164,7 @@ export default {
         return;
       }
 
-      const code = Math.floor(100000 + Math.random() * 900000).toString(); // 6 цифр
+      const code = Math.floor(100000 + Math.random() * 900000).toString();
       this.verificationCode = code;
 
       try {

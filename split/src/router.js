@@ -23,7 +23,6 @@ const routes = [
     ],
   },
   { path: '/login', component: LoginPage},
-  { path: '/profile', component: ProfilePage},
   { path: '/welcome', component: WelcomePage },
   { path: '/main', component: ManageProducts },
 ];

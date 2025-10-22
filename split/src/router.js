@@ -31,7 +31,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory('/my-shop7.10/'),
+  history: createWebHistory('/Split/'),
   routes,
 });
 

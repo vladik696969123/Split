@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import emailjs from "emailjs-com";
+
 export default {
   data() {
     return {
@@ -128,7 +130,9 @@ export default {
     login() {
       const users = JSON.parse(localStorage.getItem("users") || "[]");
       const user = users.find(
-        (u) => (u.email === this.username || u.email === this.email) && u.password === this.password
+        (u) =>
+          (u.email === this.username || u.email === this.email) &&
+          u.password === this.password
       );
       if (user) {
         this.message = "✅ Login successful!";
@@ -141,95 +145,88 @@ export default {
       }
     },
 
-   async register() {
-  if (!this.email || !this.password) {
-    this.message = "Enter your email and password!";
-    this.isError = true;
-    return;
-  }
+    async register() {
+      if (!this.email || !this.password) {
+        this.message = "Enter your email and password!";
+        this.isError = true;
+        return;
+      }
 
-  if (!this.validatePassword()) {
-    this.isError = true;
-    return;
-  }
+      if (!this.validatePassword()) {
+        this.isError = true;
+        return;
+      }
 
-  const users = JSON.parse(localStorage.getItem("users") || "[]");
-  if (users.find((u) => u.email === this.email)) {
-    this.message = "⚠️ This email is already registered!";
-    this.isError = true;
-    return;
-  }
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      if (users.find((u) => u.email === this.email)) {
+        this.message = "⚠️ This email is already registered!";
+        this.isError = true;
+        return;
+      }
 
-  try {
-    const res = await fetch("http://localhost:3000/send-code", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: this.email }),
-    });
-    const data = await res.json();
+      // === Використовуємо EmailJS замість localhost ===
+      const code = Math.floor(100000 + Math.random() * 900000).toString(); // 6 цифр
+      this.verificationCode = code;
 
-    if (data.success) {
-      // Зберігаємо код як рядок без пробілів
-      this.verificationCode = String(data.code).trim();
-      localStorage.setItem("verificationCode", this.verificationCode);
-      localStorage.setItem("registeredEmail", String(this.email).trim());
-      localStorage.setItem("pendingUser", JSON.stringify({ email: this.email, password: this.password }));
-      this.showCodeInput = true;
-      this.message = "";
+      try {
+ await emailjs.send(
+  "service_h3o779l", // твій Service ID
+  "template_n3ur54a", // твій Template ID
+  {
+    title: "Split Verification Code",
+    email: this.email,
+    code: code,
+  },
+  "HtT_N8t9F-CDRmGHC" // твій Public Key
+);
 
-      console.log("Confirmation code (dev):", this.verificationCode);
-    } else {
-      this.message = "Error sending email.";
-      this.isError = true;
-    }
-  } catch (err) {
-    console.error(err);
-    this.message = "Server error.";
-    this.isError = true;
-  }
-},
+        localStorage.setItem("verificationCode", code);
+        localStorage.setItem(
+          "pendingUser",
+          JSON.stringify({ email: this.email, password: this.password })
+        );
+
+        this.showCodeInput = true;
+        this.message = "";
+        console.log("📧 Code sent:", code);
+      } catch (error) {
+        console.error(error);
+        this.message = "Error sending email.";
+        this.isError = true;
+      }
+    },
 
     verifyCode() {
-  const savedCode = (localStorage.getItem("verificationCode") || "").trim();
-  const savedEmail = (localStorage.getItem("registeredEmail") || "").trim();
-  const entered = (this.enteredCode || "").trim();
+      const savedCode = localStorage.getItem("verificationCode") || "";
+      const entered = (this.enteredCode || "").trim();
 
-  if (!savedCode) {
-    this.message = "Code not found. Click 'Register' to get the code again.";
-    this.isError = true;
-    return;
-  }
-
-  if (!this.email && savedEmail) {
-    this.email = savedEmail;
-  }
-
-  if (entered === savedCode) {
-    const pendingUser = JSON.parse(localStorage.getItem("pendingUser") || "{}");
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-
-    if (pendingUser && pendingUser.email) {
-      if (!users.find(u => u.email === pendingUser.email)) {
-        users.push(pendingUser);
-        localStorage.setItem("users", JSON.stringify(users));
+      if (!entered) {
+        this.message = "Enter the verification code!";
+        this.isError = true;
+        return;
       }
-    }
 
-    localStorage.removeItem("verificationCode");
-    localStorage.removeItem("pendingUser");
-    localStorage.removeItem("registeredEmail");
+      if (entered === savedCode) {
+        const pendingUser = JSON.parse(localStorage.getItem("pendingUser") || "{}");
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-    this.message = "✅ Registration confirmed!";
-    this.isError = false;
-    localStorage.setItem("authUser", this.email);
-    this.$router.push("/welcome");
-    this.clearFields();
-  } else {
-    this.message = "❌ Invalid code!";
-    this.isError = true;
-    console.warn("Entered:", entered, "Expected:", savedCode);
-  }
-},
+        if (pendingUser && pendingUser.email) {
+          users.push(pendingUser);
+          localStorage.setItem("users", JSON.stringify(users));
+        }
+
+        localStorage.removeItem("verificationCode");
+        localStorage.removeItem("pendingUser");
+
+        this.message = "✅ Registration confirmed!";
+        this.isError = false;
+        localStorage.setItem("authUser", this.email);
+        this.$router.push("/welcome");
+      } else {
+        this.message = "❌ Invalid code!";
+        this.isError = true;
+      }
+    },
   },
 };
 </script>

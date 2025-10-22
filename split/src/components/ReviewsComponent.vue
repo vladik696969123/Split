@@ -10,22 +10,23 @@
             <th>Comment</th>
           </tr>
         </thead>
-        <tbody>
-          <tr 
-            v-for="(review, index) in reviews" 
-            :key="index"
-            class="fade-in"
-            :style="{ animationDelay: (index * 0.05) + 's' }"
-          >
-            <td>{{ review.Name }}</td>
-            <td>
-              <span class="stars">
-                <span v-for="n in review.Rating" :key="n">⭐ ⭐ ⭐ ⭐ ⭐</span>
-              </span>
-            </td>
-            <td>{{ review.Comment }}</td>
-          </tr>
-        </tbody>
+<tbody>
+  <tr 
+    v-for="(review, index) in reviews" 
+    :key="index"
+    class="fade-in"
+    :style="{ animationDelay: (index * 0.05) + 's' }"
+  >
+    <td data-label="Name">{{ review.Name }}</td>
+    <td data-label="Rating">
+      <span class="stars">
+        <span v-for="n in review.Rating" :key="n">⭐</span>
+      </span>
+    </td>
+    <td data-label="Comment">{{ review.Comment }}</td>
+  </tr>
+</tbody>
+
       </table>
     </div>
   </div>
@@ -74,6 +75,9 @@ Mia Anderson,5,Everything worked flawlessly, thanks Split!
   font-family: "Inter", sans-serif;
   background: white;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h2 {
@@ -83,11 +87,12 @@ h2 {
   margin-bottom: 35px;
   color: #3b82f6;
   letter-spacing: 0.5px;
-    background-size: 200% 200%;
+  background-size: 200% 200%;
   animation: gradient-animation 3s ease infinite;
 }
 
 .table-wrapper {
+  width: 100%;
   overflow-x: auto;
   background: white;
   border-radius: 16px;
@@ -101,6 +106,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  min-width: 320px;
 }
 
 th {
@@ -121,7 +127,7 @@ td {
   line-height: 1.5;
 }
 
-tbody tr{
+tbody tr {
   background: #f9f9fb;
 }
 
@@ -148,15 +154,72 @@ tbody tr:hover {
   }
 }
 
-@media (max-width: 768px) {
+/* === 📱 Мобільна адаптація === */
+
+/* Великі ноутбуки */
+@media (max-width: 1280px) {
+  h2 {
+    font-size: 26px;
+  }
+  th, td {
+    font-size: 14px;
+  }
+}
+
+/* Планшети */
+@media (max-width: 992px) {
   h2 {
     font-size: 24px;
   }
   table {
-    font-size: 13px;
+    font-size: 14px;
+  }
+  .table-wrapper {
+    padding: 20px;
+  }
+}
+
+/* Телефони */
+@media (max-width: 768px) {
+  .reviews-container {
+    padding: 20px 3%;
+  }
+  h2 {
+    font-size: 22px;
   }
   th, td {
     padding: 10px;
+    font-size: 13px;
+  }
+}
+
+/* Маленькі телефони (наприклад iPhone SE, 375x667) */
+@media (max-width: 400px) and (max-height: 700px) {
+  .reviews-container {
+    padding: 15px 2%;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  table {
+    font-size: 12px;
+  }
+  th, td {
+    padding: 8px;
+  }
+  .stars {
+    font-size: 15px;
+  }
+}
+
+/* Дуже маленькі екрани */
+@media (max-width: 320px) {
+  h2 {
+    font-size: 16px;
+  }
+  th, td {
+    font-size: 11px;
+    padding: 6px;
   }
 }
 </style>

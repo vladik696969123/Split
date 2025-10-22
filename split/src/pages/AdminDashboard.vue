@@ -4,28 +4,40 @@
       <div class="nav-left">
         <a href="#" class="logo-icon">Split</a>
       </div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqrIfehLlIc2QwyIOQ1df7q-NvHz2TAlCfVA&s" alt="split" class="split">
-      <nav class="nav-links">
+
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqrIfehLlIc2QwyIOQ1df7q-NvHz2TAlCfVA&s"
+        alt="split"
+        class="split"
+      />
+
+      <!-- Кнопка меню (для мобільних) -->
+      <button class="menu-btn" @click="toggleMenu">
+        ☰
+      </button>
+
+      <nav class="nav-links" :class="{ 'show-menu': menuOpen }">
         <router-link to="/admin/products" active-class="active-link">Main</router-link>
         <router-link to="/admin/reviews" active-class="active-link">Reviews</router-link>
         <router-link 
-    :to="isLoggedIn ? '/profile' : '/login'" 
-    class="account-link"
-    active-class="active-link"
-  >
-    <template v-if="isLoggedIn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-      </svg>
-    </template>
-    <template v-else>
-      Account
-    </template>
-  </router-link>
+          :to="isLoggedIn ? '/profile' : '/login'" 
+          class="account-link"
+          active-class="active-link"
+        >
+          <template v-if="isLoggedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"
+              />
+            </svg>
+          </template>
+          <template v-else>
+            Account
+          </template>
+        </router-link>
       </nav>
     </header>
-
-    <!-- Сіра лінія під навбаром -->
 
     <main class="main-content">
       <router-view />
@@ -34,19 +46,24 @@
 </template>
 
 <script>
-
 export default {
   name: 'AdminDashboard',
   data() {
     return {
-      isLoggedIn: false
-    }
+      isLoggedIn: false,
+      menuOpen: false
+    };
   },
   created() {
-    // Перевіряємо, чи користувач авторизований (наприклад через localStorage)
+    // Перевірка, чи користувач авторизований
     this.isLoggedIn = !!localStorage.getItem('username');
+  },
+  methods: {
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
+    }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -66,35 +83,30 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.85); /* прозорий білий фон */
-  backdrop-filter: blur(10px); /* ефект прозорості / розмиття */
+  width: 100%; /* ✅ тепер на всю ширину */
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
   color: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 8%;
-  transition: background 0.4s ease-in-out;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* легка тінь для виділення */
+  padding: 14px 40px; /* замість відсотків — фіксовані відступи */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   animation: slideDown 0.6s ease-out;
-}
-
-.nav-left {
-  font-weight: 700;
-  font-size: 22px;
-  color: black;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  letter-spacing: 0.5px;
+  box-sizing: border-box; /* щоб padding не зменшував ширину */
 }
 
 .logo-icon {
   font-size: 22px;
+  font-weight: 700;
+  color: black;
+  text-decoration: none;
 }
 
 .nav-links {
   display: flex;
   gap: 40px;
+  align-items: center;
 }
 
 .nav-links a {
@@ -106,6 +118,11 @@ export default {
   border-radius: 6px;
   transition: all 0.3s ease;
   position: relative;
+}
+
+.nav-links a:hover {
+  color: #000000;
+  transform: translateY(-1px);
 }
 
 .nav-links a::after {
@@ -124,43 +141,7 @@ export default {
   width: 100%;
 }
 
-.nav-links a:hover {
-  color: #000000;
-  transform: translateY(-1px);
-}
-
-/* Сіра лінія під навбаром */
-.bottom-line {
-  width: 100%;
-  height: 1px;
-  background-color: #cccccc; /* сірий колір */
-}
-
-/* Основний контент */
-.main-content {
-  flex: 1;
-  padding: 40px 8%;
-}
-
-/* === Анімації === */
-@keyframes slideDown {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.12); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.split{
-  border-radius: 10px;
-  height: 30px;
-  position: absolute;
-  right: 1750px;
-}
-
+/* === Іконка акаунта === */
 .account-link svg {
   width: 24px;
   height: 24px;
@@ -173,4 +154,65 @@ export default {
   transform: translateY(-2px);
 }
 
+/* === Зображення логотипу === */
+.split {
+  border-radius: 10px;
+  height: 30px;
+  margin-right: auto;
+  margin-left: 20px;
+}
+
+/* === Кнопка меню для мобільних === */
+.menu-btn {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* === Основний контент === */
+.main-content {
+  flex: 1;
+  padding: 40px 8%;
+}
+
+/* === Анімація === */
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* === Адаптивність === */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.show-menu {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .split {
+    display: none;
+  }
+
+  .main-content {
+    padding: 20px 5%;
+  }
+}
 </style>

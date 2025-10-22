@@ -287,18 +287,16 @@ input:focus {
   box-shadow: 0 0 8px rgba(106, 90, 205, 0.4);
 }
 
-.btn {
-  width: 100%;
-  padding: 12px;
-  background: #6a5acd;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-  font-family: "Poppins", sans-serif;
-  margin-bottom: 10px;
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  width: 90%;
+  max-width: 400px;
+  padding: 40px 36px;
+  border-radius: 24px;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn:hover {
@@ -418,4 +416,90 @@ input:focus {
 .link:hover::after {
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .card {
+    padding: 30px 24px;
+    border-radius: 18px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  input, .btn {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 20px;
+  }
+
+  .card {
+    padding: 24px 20px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    max-width: 450px;
+    padding: 48px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+}
+
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    background: linear-gradient(160deg, #000000, #1a1a1a);
+  }
+}
+
+.btn {
+   width: 100%;
+    padding: 12px;
+     background: #6a5acd;
+      color: white;
+       border: none;
+        border-radius: 12px;
+         font-weight: 600;
+          cursor: pointer;
+           transition: 0.3s;
+            font-family: "Poppins", sans-serif;
+             margin-bottom: 10px;
+              }
 </style>

@@ -154,9 +154,6 @@ tbody tr:hover {
   }
 }
 
-/* === 📱 Мобільна адаптація === */
-
-/* Великі ноутбуки */
 @media (max-width: 1280px) {
   h2 {
     font-size: 26px;
@@ -166,7 +163,6 @@ tbody tr:hover {
   }
 }
 
-/* Планшети */
 @media (max-width: 992px) {
   h2 {
     font-size: 24px;
@@ -179,7 +175,6 @@ tbody tr:hover {
   }
 }
 
-/* Телефони */
 @media (max-width: 768px) {
   .reviews-container {
     padding: 20px 3%;
@@ -193,7 +188,6 @@ tbody tr:hover {
   }
 }
 
-/* Маленькі телефони (наприклад iPhone SE, 375x667) */
 @media (max-width: 400px) and (max-height: 700px) {
   .reviews-container {
     padding: 15px 2%;
@@ -212,7 +206,6 @@ tbody tr:hover {
   }
 }
 
-/* Дуже маленькі екрани */
 @media (max-width: 320px) {
   h2 {
     font-size: 16px;

@@ -15,7 +15,6 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const username = ref("User");
 
-// Отримуємо ім'я користувача з localStorage
 onMounted(() => {
   const authUser = localStorage.getItem("authUser");
   if (authUser && authUser.name) {

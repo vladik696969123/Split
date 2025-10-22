@@ -11,7 +11,6 @@
         class="split"
       />
 
-      <!-- Кнопка меню (для мобільних) -->
       <button class="menu-btn" @click="toggleMenu">
         ☰
       </button>
@@ -78,7 +77,6 @@ export default {
   color: #000;
 }
 
-/* === Навбар === */
 .nav-bar {
   position: sticky;
   top: 0;
@@ -141,7 +139,6 @@ export default {
   width: 100%;
 }
 
-/* === Іконка акаунта === */
 .account-link svg {
   width: 24px;
   height: 24px;
@@ -154,7 +151,6 @@ export default {
   transform: translateY(-2px);
 }
 
-/* === Зображення логотипу === */
 .split {
   border-radius: 10px;
   height: 30px;
@@ -162,7 +158,6 @@ export default {
   margin-left: 20px;
 }
 
-/* === Кнопка меню для мобільних === */
 .menu-btn {
   display: none;
   font-size: 24px;
@@ -171,19 +166,16 @@ export default {
   cursor: pointer;
 }
 
-/* === Основний контент === */
 .main-content {
   flex: 1;
   padding: 40px 8%;
 }
 
-/* === Анімація === */
 @keyframes slideDown {
   from { transform: translateY(-20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* === Адаптивність === */
 @media (max-width: 900px) {
   .nav-links {
     display: none;

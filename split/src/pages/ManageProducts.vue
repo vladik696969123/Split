@@ -1,12 +1,10 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col">
 
-    <!-- Hero Section -->
     <section class="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center text-center md:text-left">
 
-          <!-- Left Content -->
           <div>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-black tracking-tight">
               Professional
@@ -34,7 +32,6 @@
             </div>
           </div>
 
-          <!-- Right Animation -->
           <div class="flex justify-center md:justify-end">
             <iframe
               src="https://lottie.host/embed/d523fdf4-5e1e-4f2f-a583-32d4dbf8aac0/KuwqlMmWl5.lottie"
@@ -48,7 +45,6 @@
 
     <hr class="border-gray-200">
 
-    <!-- Services Section -->
     <section class="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white flex-1">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-12">
@@ -59,7 +55,6 @@
           </p>
         </div>
 
-        <!-- Service Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <a
             v-for="service in services"
@@ -81,7 +76,6 @@
       </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-white py-10 sm:py-12 px-4 sm:px-6 lg:px-8 border-t">
       <div class="max-w-7xl mx-auto flex flex-col items-center text-center space-y-4 sm:space-y-5">
         <h5 class="gradient-text1 text-xl sm:text-2xl font-bold">Split</h5>

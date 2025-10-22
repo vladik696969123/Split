@@ -164,20 +164,19 @@ export default {
         return;
       }
 
-      // === Використовуємо EmailJS замість localhost ===
       const code = Math.floor(100000 + Math.random() * 900000).toString(); // 6 цифр
       this.verificationCode = code;
 
       try {
  await emailjs.send(
-  "service_h3o779l", // твій Service ID
-  "template_n3ur54a", // твій Template ID
+  "service_h3o779l",
+  "template_n3ur54a",
   {
     title: "Split Verification Code",
     email: this.email,
     code: code,
   },
-  "HtT_N8t9F-CDRmGHC" // твій Public Key
+  "HtT_N8t9F-CDRmGHC"
 );
 
         localStorage.setItem("verificationCode", code);
